@@ -16,6 +16,7 @@ pipeline {
             }
             steps {
                 sh 'ggshield secret scan ci'
+                sh 'ggshield secret scan --repo .'
             }
         }
     stage('Grype Scane') {
