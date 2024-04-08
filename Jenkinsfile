@@ -18,5 +18,10 @@ pipeline {
                 sh 'ggshield secret scan ci'
             }
         }
+    stage('Grype Scane') {
+      steps {
+        sh 'grype dir:. --scope AllLayers'
+      }
+    }
   }
 }
