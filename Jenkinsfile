@@ -37,5 +37,18 @@ pipeline {
        
       }
     }
+    stage('Check Results') {
+            steps {
+                script {
+                    // Check the exit code to determine if secrets were found
+                    int exitCode = sh(returnStatus: true, script: 'ggshield secret scan ci')
+                    if (exitCode != 0) {
+                        error "GitGuardian found hardcoded secrets!"
+                    } else {
+                        echo "No hardcoded secrets found."
+                    }
+                }
+            }
+    }
   }
 }
